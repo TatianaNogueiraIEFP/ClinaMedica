@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pacientes da Clínica</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+        </tr>
+
+        <tr th:each="p:${pacientes}">
+            <td th:text="${p.nome}"></td>
+            <td th:text="${p.idade}"></td>
+        </tr>
+    </table>
+
+<section>
+    <h2>Novo Paciente</h2>
+
+    <form th:action="@{/adiconarpacientes}" method="post">
+
+        <input type="text" name="nome" placeholder="Indica o teu nome completo">
+
+        <input type="number" name="idade" placeholder="Indica a Idade">
+
+        <button type="submit">Adicionar</button>
+    </form>
+</section>
+</body>
+</html>
