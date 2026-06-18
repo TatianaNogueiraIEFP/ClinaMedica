@@ -1,0 +1,59 @@
+/* Define o estilo geral da página */
+body {
+    /* Tipo de letra principal */
+    font-family: Arial, sans-serif;
+
+    /* Espaçamento exterior da página */
+    margin: 20px;
+
+    /* Cor de fundo da página */
+    background-color: #2746F5;
+}
+
+/* Estilo aplicado aos títulos de nível 2 */
+h2 {
+    /* Cor do texto */
+    color: #FF009E;
+}
+
+/* Estilo da tabela */
+table {
+    /* Largura da tabela relativamente à página */
+    width: 60%;
+
+    /* Junta as bordas das células */
+    border-collapse: collapse;
+
+    /* Espaço acima da tabela */
+    margin-top: 15px;
+}
+
+/* Estilo do cabeçalho da tabela */
+th {
+    /* Cor de fundo das células de cabeçalho */
+    background-color: #FFFFFF;
+}
+
+/* Estilo comum às células de cabeçalho e de dados */
+th,
+td {
+    /* Borda cinzenta de 1 pixel */
+    border: 1px solid #999;
+
+    /* Espaçamento interno das células */
+    padding: 10px;
+}
+
+/* Estilo geral dos botões */
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+/* Classe aplicada aos nomes destacados */
+.destacado {
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
+}

@@ -2,33 +2,67 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <!-- Configuração para tornar a página responsiva em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Título apresentado no separador do navegador -->
     <title>Pacientes da Clínica</title>
+
+    <!-- Ligação ao ficheiro CSS para estilização da página -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+<!-- Corpo principal da página -->
 <body>
-    <table>
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-        </tr>
 
-        <tr th:each="p:${pacientes}">
-            <td th:text="${p.nome}"></td>
-            <td th:text="${p.idade}"></td>
-        </tr>
-    </table>
+<!-- Tabela que apresenta todos os pacientes registados -->
+<table id="tabelaRegisto">
+    <tr>
+        <!-- Cabeçalhos das colunas -->
+        <th>Nome</th>
+        <th>Idade</th>
+    </tr>
 
+    <!-- Percorre a lista de pacientes recebida do controlador -->
+    <tr th:each="p:${pacientes}">
+        <!-- Apresenta o nome do paciente -->
+        <td class="nome-registo" th:text="${p.nome}"></td>
+
+        <!-- Apresenta a idade do paciente -->
+        <td th:text="${p.idade}"></td>
+    </tr>
+</table>
+
+<!-- Secção dedicada às operações sobre pacientes -->
 <section>
+
+    <!-- Botão destinado a destacar visualmente os nomes -->
+    <button type="button" onclick="destacarNome()">Destacar nome</button>
+
+    <!-- Título da área de registo -->
     <h2>Novo Paciente</h2>
 
+    <!-- Formulário de inserção de novos pacientes -->
     <form th:action="@{/adiconarpacientes}" method="post">
 
+        <!-- Campo para introdução do nome -->
         <input type="text" name="nome" placeholder="Indica o teu nome completo">
 
+        <!-- Campo para introdução da idade -->
         <input type="number" name="idade" placeholder="Indica a Idade">
 
-        <button type="submit">Adicionar</button>
+        <!-- Envia os dados para o controlador -->
+        <button type="submit" onclick="mostrarMensagem()">Adicionar</button>
+
+        <!-- Mostra ou oculta a tabela através de JavaScript -->
+        <button type="button" onclick="esconderMostrarTabela()">
+            Esconder/Mostrar Tabela
+        </button>
     </form>
+
+    <!-- Carrega o ficheiro JavaScript da aplicação -->
+    <script src="/js/script.js"></script>
+
 </section>
 </body>
 </html>
