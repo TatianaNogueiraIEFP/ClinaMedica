@@ -6,27 +6,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Classe que representa um paciente da clínica.
+ * Classe que representa um médico da clínica.
  */
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Paciente {
+public class Medico {
 
     /**
-     * Identificador único do paciente.
+     * Identificador único do médico.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
-     * Utilizador associado ao paciente.
-     * Cada paciente possui um único utilizador.
+     * Especialidade médica do profissional.
+     */
+    private String especialidade;
+
+    /**
+     * Utilizador associado ao médico.
+     * Cada médico possui um único utilizador.
      */
     @OneToOne
-    @JoinColumn(name = "utilizador", unique = true)
+    @JoinColumn(name = "utilizador_id", unique = true)
     private Utilizador utilizador;
-
 }
