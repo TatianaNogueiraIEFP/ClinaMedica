@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Utilizadores da Clínica</title>
+
+    <!-- Ligação ao ficheiro de estilos CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-utilizadores">
+<!-- SECÇÃO: FORMULÁRIO PARA CRIAR NOVO UTILIZADOR -->
+<section>
+    <h2>Novo Utilizador</h2>
+    <!-- NAVEGAÇÃO ENTRE PÁGINAS -->
+    <div class="botoes">
+        <a href="/medicos">
+            <button type="button">Médicos</button>
+        </a>
+
+        <a href="/pacientes">
+            <button type="button">Pacientes</button>
+        </a>
+
+        <a href="/secretarias">
+            <button type="button">Secretárias</button>
+        </a>
+    </div>
+
+    <br><br>
+
+    <!-- Formulário que envia os dados para o endpoint /adicionar-utilizador -->
+    <form th:action="@{/adicionar-utilizador}" method="post">
+
+        <!-- Nome completo do utilizador -->
+        <input type="text" name="nome" placeholder="Indique o nome completo">
+
+        <!-- Email do utilizador -->
+        <input type="email" name="email" placeholder="Indique o e-mail">
+
+        <!-- Palavra-passe do utilizador -->
+        <input type="password" name="senha" placeholder="Indique a palavra-passe">
+
+        <!-- Perfil do utilizador (Paciente, Médico ou Secretária) -->
+        <select name="perfil">
+            <option value="0">Selecione o cargo</option>
+            <option value="PACIENTE">Paciente</option>
+            <option value="MEDICO">Médico</option>
+            <option value="SECRETARIA">Secretária</option>
+        </select>
+
+        <!-- Número de telefone -->
+        <input type="text" name="telefone" placeholder="Indique o telefone">
+
+        <!-- Morada do utilizador -->
+        <input type="text" name="morada" placeholder="Indique a morada">
+
+        <!-- Data de nascimento do utilizador -->
+        <label>Data de nascimento</label><input type="date" name="dataNascimento">
+
+        <!-- Botões de ação do formulário -->
+        <div class="botoes">
+
+            <!-- Submete o formulário e executa função JavaScript -->
+            <button type="submit" onclick="mostrarMensagem()">
+                Adicionar
+            </button>
+
+            <!-- Mostra ou esconde a tabela de utilizadores -->
+            <button type="button" onclick="esconderMostrarTabela()">
+                Esconder/Mostrar Tabela
+            </button>
+
+            <!-- Destaca nomes na tabela -->
+            <button type="button" onclick="destacarNome()">
+                Destacar Nome
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+<!-- SECÇÃO: TABELA DE UTILIZADORES REGISTADOS -->
+<table id="tabelaRegisto">
+
+    <!-- Cabeçalho da tabela -->
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+        <th>Idade</th>
+        <th>Telefone</th>
+        <th>Morada</th>
+    </tr>
+
+    <!-- Loop Thymeleaf que percorre a lista de utilizadores -->
+    <tr th:each="u : ${utilizadores}">
+
+        <!-- Nome do utilizador -->
+        <td class="nome-registo" th:text="${u.nome}"></td>
+
+        <!-- Email do utilizador -->
+        <td th:text="${u.email}"></td>
+
+        <!-- Perfil do utilizador -->
+        <td th:text="${u.perfil}"></td>
+
+        <!-- Idade calculada ou armazenada -->
+        <td th:text="${u.idade}"></td>
+
+        <!-- Telefone -->
+        <td th:text="${u.telefone}"></td>
+
+        <!-- Morada -->
+        <td th:text="${u.morada}"></td>
+
+    </tr>
+
+</table>
+
+<!-- Ligação ao ficheiro JavaScript -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

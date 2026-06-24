@@ -26,7 +26,14 @@ public class Paciente {
      * Cada paciente possui um único utilizador.
      */
     @OneToOne
-    @JoinColumn(name = "utilizador", unique = true)
+    @JoinColumn(name = "utilizador_id", unique = true)
     private Utilizador utilizador;
 
+    /**
+     * Utilizador associado ao medico.
+     * Cada paciente possui um único medico.
+     */
+    @OneToOne
+    @JoinColumn(name = "medico_id", unique = true)
+    private Utilizador medico;
 }

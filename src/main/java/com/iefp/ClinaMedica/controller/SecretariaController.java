@@ -39,22 +39,4 @@ public class SecretariaController {
 
         return "secretarias";
     }
-
-    /**
-     * Adiciona uma secretária (versão simplificada).
-     *
-     * Nota: em projeto real, deve ser usado o RegistoService.
-     */
-    @PostMapping("/adicionar-secretaria")
-    public String adicionarSecretaria(
-            @RequestParam String nome,
-            @RequestParam String email,
-            @RequestParam String senha) {
-
-        // Versão simplificada (sem Utilizador completo)
-        Secretaria secretaria = new Secretaria();
-        secretariaRepository.save(secretaria);
-
-        return "redirect:/secretarias";
-    }
 }

@@ -6,47 +6,42 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 /**
  * Controlador responsável pela gestão de pacientes.
+ * Todas as rotas deste controller começam por /pacientes
  */
 @Controller
+@RequestMapping("/pacientes")
 public class PacienteController {
 
     private final PacienteRepository pacienteRepository;
 
+    /**
+     * Injeção do repositório de pacientes através do construtor
+     */
     public PacienteController(PacienteRepository pacienteRepository) {
         this.pacienteRepository = pacienteRepository;
     }
 
     /**
-     * Apresenta a lista de pacientes.
+     * Apresenta a lista de todos os pacientes registados.
+     * URL: GET /pacientes
      */
-    @GetMapping("/pacientes")
-    public String listaPacientes(Model model) {
+    @GetMapping
+    public String listarPacientes(Model model) {
 
+        // Vai buscar todos os pacientes à base de dados
         List<Paciente> pacientes = pacienteRepository.findAll();
+
+        // Envia a lista para a view (Thymeleaf)
         model.addAttribute("pacientes", pacientes);
 
+        // Nome da página HTML (templates/pacientes.html)
         return "pacientes";
-    }
-
-    /**
-     * Adiciona um novo paciente (versão simplificada).
-     *
-     * Nota: idealmente isto devia chamar o RegistoService.
-     */
-    @PostMapping("/adicionar-paciente")
-    public String adicionarPaciente(@RequestParam Long utilizadorId) {
-
-        Paciente paciente = new Paciente();
-        paciente.setUtilizador(null); // aqui deves buscar o Utilizador pelo ID
-
-        pacienteRepository.save(paciente);
-
-        return "redirect:/pacientes";
     }
 }

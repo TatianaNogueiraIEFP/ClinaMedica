@@ -39,25 +39,4 @@ public class MedicoController {
 
         return "medicos";
     }
-
-    /**
-     * Adiciona um médico simples (versão básica).
-     *
-     * Nota: em projeto real, isto deve usar RegistoService.
-     */
-    @PostMapping("/adicionar-medico")
-    public String adicionarMedico(
-            @RequestParam String nome,
-            @RequestParam String email,
-            @RequestParam String senha,
-            @RequestParam String especialidade) {
-
-        // Aqui está simplificado (sem Utilizador ligado ao RegistoService)
-        Medico medico = new Medico();
-        medico.setEspecialidade(especialidade);
-
-        medicoRepository.save(medico);
-
-        return "redirect:/medicos";
-    }
 }

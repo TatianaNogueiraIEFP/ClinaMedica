@@ -1,59 +1,118 @@
-/* Define o estilo geral da página */
+/* =======================
+   GLOBAL (ESTILOS GERAIS)
+   ======================= */
+
+/* Estilos base da página */
 body {
-    /* Tipo de letra principal */
     font-family: Arial, sans-serif;
-
-    /* Espaçamento exterior da página */
     margin: 20px;
-
-    /* Cor de fundo da página */
-    background-color: #2746F5;
 }
 
-/* Estilo aplicado aos títulos de nível 2 */
+/* Títulos principais */
 h2 {
-    /* Cor do texto */
-    color: #FF009E;
+    color: #FFFFFF;
 }
 
-/* Estilo da tabela */
+/* Labels */
+label{
+    color: white;
+}
+
+/* Botões em toda a aplicação */
+button {
+    padding: 9px 14px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Efeito hover dos botões */
+button:hover {
+    opacity: 0.85;
+}
+
+/* Tabelas globais */
 table {
-    /* Largura da tabela relativamente à página */
-    width: 60%;
-
-    /* Junta as bordas das células */
+    width: 100%;
     border-collapse: collapse;
-
-    /* Espaço acima da tabela */
     margin-top: 15px;
 }
 
-/* Estilo do cabeçalho da tabela */
-th {
-    /* Cor de fundo das células de cabeçalho */
-    background-color: #FFFFFF;
-}
-
-/* Estilo comum às células de cabeçalho e de dados */
+/* Células da tabela */
 th,
 td {
-    /* Borda cinzenta de 1 pixel */
     border: 1px solid #999;
-
-    /* Espaçamento interno das células */
     padding: 10px;
+    text-align: left;
+    color: white;
 }
 
-/* Estilo geral dos botões */
-button {
-    padding: 8px 12px;
-    margin: 5px;
-    cursor: pointer;
+/* Cabeçalho da tabela */
+th {
+    background-color: #eeeeee;
+    color: #444444;
 }
 
-/* Classe aplicada aos nomes destacados */
+/* Formulários globais */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 10px;
+}
+
+/* Inputs e selects */
+input,
+select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* =======================
+   UTILITÁRIOS (CLASSES REUTILIZÁVEIS)
+   ======================= */
+
+/* Espaçamento para grupo de botões */
+.botoes {
+    margin-top: 10px;
+}
+
+/* Destacar texto (ex: nome selecionado) */
 .destacado {
     color: red;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+/* Estilo para mensagens de erro */
+.erro {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f5c2c7;
+}
+
+/* =======================
+   CORES DAS PÁGINAS (BACKGROUND POR SECÇÃO)
+   ======================= */
+
+.pagina-utilizadores {
+    background-color: #0000FF;
+}
+
+.pagina-medicos {
+    background-color: #F5276C;
+}
+
+.pagina-pacientes {
+    background-color: #AB02AB;
+}
+
+.pagina-secretarias {
+    background-color: #ADAD00;
 }

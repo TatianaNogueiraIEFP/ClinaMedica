@@ -4,34 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pacientes da Clínica</title>
+    <title>Médicos da Clínica</title>
 
     <!-- Ligação ao ficheiro de estilos CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="pagina-pacientes">
+<body class="pagina-medicos">
 <a href="/utilizadores">
     <button type="button">Utilizadores</button>
 </a>
-<h2>Pacientes</h2>
-<!-- SECÇÃO: TABELA DE PACIENTES REGISTADOS -->
+<h2>Medicos</h2>
+<!-- SECÇÃO: TABELA DE MÉDICOS REGISTADOS -->
 <table id="tabelaRegisto">
 
     <!-- Cabeçalho da tabela -->
     <tr>
         <th>Nome</th>
-        <th>Idade</th>
+        <th>Especialidade</th>
     </tr>
 
-    <!-- Iteração sobre a lista de pacientes enviada pelo controller -->
-    <tr th:each="p : ${pacientes}">
+    <!-- Iteração sobre a lista de médicos enviada pelo controller -->
+    <tr th:each="m : ${medicos}">
 
-        <!-- Nome do paciente -->
-        <td class="nome-registo" th:text="${p.nome}"></td>
+        <!-- Nome do médico (vem do utilizador associado) -->
+        <td class="nome-registo"
+            th:text="${m.utilizador.nome}">
+        </td>
 
-        <!-- Idade do paciente -->
-        <td th:text="${p.idade}"></td>
+        <!-- Especialidade do médico -->
+        <td th:text="${m.especialidade}">
+        </td>
 
     </tr>
 
