@@ -1,9 +1,7 @@
 package com.iefp.ClinaMedica.controller;
 
 import com.iefp.ClinaMedica.model.Utilizador;
-import com.iefp.ClinaMedica.model.Medico;
-import com.iefp.ClinaMedica.model.Paciente;
-import com.iefp.ClinaMedica.model.Secretaria;
+import com.iefp.ClinaMedica.service.UtilizadorService;
 
 import com.iefp.ClinaMedica.repository.UtilizadorRepository;
 import com.iefp.ClinaMedica.repository.MedicoRepository;
@@ -28,9 +26,7 @@ public class UtilizadorController {
 
     // Repositórios utilizados para acesso à base de dados
     private final UtilizadorRepository utilizadorRepository;
-    private final MedicoRepository medicoRepository;
-    private final PacienteRepository pacienteRepository;
-    private final SecretariaRepository secretariaRepository;
+    private final UtilizadorService utilizadorService;
 
     /**
      * Construtor com injeção de dependências (Spring DI).
@@ -43,12 +39,10 @@ public class UtilizadorController {
     public UtilizadorController(UtilizadorRepository utilizadorRepository,
                                 MedicoRepository medicoRepository,
                                 PacienteRepository pacienteRepository,
-                                SecretariaRepository secretariaRepository) {
+                                SecretariaRepository secretariaRepository, UtilizadorService utilizadorService) {
 
         this.utilizadorRepository = utilizadorRepository;
-        this.medicoRepository = medicoRepository;
-        this.pacienteRepository = pacienteRepository;
-        this.secretariaRepository = secretariaRepository;
+        this.utilizadorService = utilizadorService;
     }
 
     /**
@@ -70,43 +64,19 @@ public class UtilizadorController {
     }
 
     /**
-     * Cria um novo utilizador e, dependendo do perfil,
-     * cria também o registo na tabela correspondente.
+     * Cria um novo utilizador no sistema e, consoante o perfil selecionado
+     * (Médico, Paciente ou Secretária), cria também o respetivo registo
+     * na tabela correspondente.
      *
-     * @param utilizador objeto preenchido automaticamente pelo formulário
-     * @return redireciona para a listagem de utilizadores
+     * O objeto Utilizador é preenchido automaticamente a partir dos dados
+     * submetidos no formulário.
+     *
+     * @param utilizador objeto com os dados do formulário
+     * @return redirecionamento para a página de listagem de utilizadores
      */
     @PostMapping("/adicionar-utilizador")
     public String adicionarUtilizador(@ModelAttribute Utilizador utilizador) {
-
-        // Guarda o utilizador na base de dados e obtém o ID gerado
-        Utilizador novo = utilizadorRepository.save(utilizador);
-
-        // Cria entidade associada ao perfil do utilizador
-        switch (utilizador.getPerfil()) {
-
-            case "MEDICO":
-                Medico medico = new Medico();
-                medico.setUtilizador(novo);
-                medicoRepository.save(medico);
-                break;
-
-            case "PACIENTE":
-                Paciente paciente = new Paciente();
-                paciente.setUtilizador(novo);
-                pacienteRepository.save(paciente);
-                break;
-
-            case "SECRETARIA":
-                Secretaria secretaria = new Secretaria();
-                secretaria.setUtilizador(novo);
-                secretariaRepository.save(secretaria);
-                break;
-
-            default:
-                // Caso o perfil não seja válido, não cria entidades adicionais
-                break;
-        }
+        utilizadorService.criarUtilizador(utilizador);
 
         return "redirect:/utilizadores";
     }

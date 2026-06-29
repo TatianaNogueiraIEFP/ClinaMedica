@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Disponibilidades</title>
+
+    <!-- Folha de estilos principal da aplicação -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-utilizadores">
+
+<!-- Botão de navegação para a área de utilizadores -->
+<a th:href="@{/utilizadores}">
+    <button type="button">Utilizadores</button>
+</a>
+
+<!-- Título principal da página -->
+<h2>Disponibilidades dos Médicos</h2>
+
+---
+
+<!-- ========================= -->
+<!-- FORMULÁRIO DE CRIAÇÃO -->
+<!-- ========================= -->
+
+<form th:action="@{/disponibilidades}" method="post">
+    <!-- Seleção do médico -->
+    <label for="medicoId">Selecione o médico</label>
+    <select id="medicoId" name="medicoId" required>
+        <option value="">Selecione o médico</option>
+
+        <!-- Lista dinâmica de médicos -->
+        <option th:each="m : ${medicos}"
+                th:value="${m.id}"
+                th:text="${m.utilizador.nome}">
+        </option>
+    </select>
+
+    <!-- Data da disponibilidade -->
+    <label for="data">Data</label>
+    <input id="data" type="date" name="data" required>
+
+    <!-- Hora de início do turno -->
+    <label for="horaInicioTrabalho">Hora início</label>
+    <input id="horaInicioTrabalho" type="time" name="horaInicioTrabalho" required>
+
+    <!-- Hora de fim do turno -->
+    <label for="horaFimTrabalho">Hora fim</label>
+    <input id="horaFimTrabalho" type="time" name="horaFimTrabalho" required>
+
+    <!-- Botão de submissão do formulário -->
+    <button type="submit">Criar Disponibilidade</button>
+
+</form>
+
+---
+
+<!-- ========================= -->
+<!-- MENSAGEM DE ERRO -->
+<!-- ========================= -->
+
+<!-- Apresenta mensagem de erro caso exista -->
+<div th:if="${erro}" class="erro">
+    <p th:text="${erro}"></p>
+</div>
+
+---
+
+<!-- ========================= -->
+<!-- TABELA DE DISPONIBILIDADES -->
+<!-- ========================= -->
+
+<table id="tabelaRegisto">
+
+    <!-- Cabeçalho da tabela -->
+    <tr>
+        <th>Médico</th>
+        <th>Data</th>
+        <th>Hora Início</th>
+        <th>Hora Fim</th>
+        <th>Estado</th>
+    </tr>
+
+    <!-- Lista de disponibilidades -->
+    <tr th:each="d : ${disponibilidades}">
+
+        <!-- Nome do médico -->
+        <td th:text="${d.medico.utilizador.nome}"></td>
+
+        <!-- Data da disponibilidade -->
+        <td th:text="${d.data}"></td>
+
+        <!-- Hora de início -->
+        <td th:text="${d.horaInicio}"></td>
+
+        <!-- Hora de fim -->
+        <td th:text="${d.horaFim}"></td>
+
+        <!-- Estado da disponibilidade -->
+        <td th:text="${d.ocupada ? 'Ocupada' : 'Livre'}"></td>
+
+    </tr>
+
+</table>
+
+</body>
+</html>

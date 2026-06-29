@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.model;
 
+import com.iefp.ClinaMedica.classes.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,9 +45,9 @@ public class Utilizador {
 
     /**
      * Perfil ou função do utilizador no sistema
-     * (por exemplo: ADMIN, MÉDICO ou RECECIONISTA).
      */
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private Perfil perfil;
 
     /**
      * Data de nascimento do utilizador.

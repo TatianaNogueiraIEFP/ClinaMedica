@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.model;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,8 @@ public class Medico {
     /**
      * Especialidade médica do profissional.
      */
-    private String especialidade;
+    @Enumerated(EnumType.STRING)
+    private Especialidade especialidade;
 
     /**
      * Utilizador associado ao médico.

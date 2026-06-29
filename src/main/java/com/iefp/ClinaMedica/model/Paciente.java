@@ -33,7 +33,7 @@ public class Paciente {
      * Utilizador associado ao medico.
      * Cada paciente possui um único medico.
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "medico_id", unique = true)
-    private Utilizador medico;
+    private Medico medico;
 }
