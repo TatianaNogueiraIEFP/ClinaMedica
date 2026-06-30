@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.repository;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import com.iefp.ClinaMedica.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,6 @@ import java.util.List;
  */
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
-    @Query("SELECT DISTINCT e.nome FROM Medico m JOIN m.especialidades e WHERE e IS NOT NULL")
-    List<String> listarEspecialidades();
+    @Query("SELECT DISTINCT m.especialidade FROM Medico m WHERE m.especialidade IS NOT NULL")
+    List<Especialidade> listarEspecialidades();
 }

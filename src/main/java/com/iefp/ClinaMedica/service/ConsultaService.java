@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.service;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import com.iefp.ClinaMedica.model.Consulta;
 import com.iefp.ClinaMedica.model.Disponibilidade;
 import com.iefp.ClinaMedica.model.Paciente;
@@ -28,7 +29,7 @@ public class ConsultaService {
         return consultaRepository.findAll();
     }
 
-    public List<String> listarEspecialidades() {
+    public List<Especialidade> listarEspecialidades() {
         return medicoRepository.listarEspecialidades();
     }
 
@@ -49,16 +50,17 @@ public class ConsultaService {
         Secretaria secretaria = secretariaRepository.findById(secretariaId)
                 .orElseThrow(()->new RuntimeException("Secretária não encontrada"));
 
-        Consulta consulta = new Consulta(
-                null,
-                disponibilidade,
-                paciente,
-                secretaria,
-                disponibilidade.getData(),
-                disponibilidade.getHoraInicio(),
-                disponibilidade.getHoraFim(),
-                "MARCADA"
-        );
+        Consulta consulta = new Consulta();
+
+        consulta.setDisponibilidade(disponibilidade);
+        consulta.setPaciente(paciente);
+        consulta.setSecretaria(secretaria);
+        consulta.setData(disponibilidade.getData());
+        consulta.setHoraInicio(disponibilidade.getHoraInicio());
+        consulta.setHoraFim(disponibilidade.getHoraFim());
+        consulta.setEstado("MARCADA");
+
+        consultaRepository.save(consulta);
 
         consultaRepository.save(consulta);
 

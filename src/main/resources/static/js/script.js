@@ -28,3 +28,29 @@ function destacarNome() {
         nome.classList.toggle("destacado");
     });
 }
+
+// Aguarda que todo o HTML esteja carregado antes de executar o script
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Vai buscar o elemento <select> do perfil (Paciente, Médico, Secretária)
+    const perfil = document.querySelector('select[name="perfil"]');
+
+    // Vai buscar o campo (div) das especialidades
+    const campoEspecialidades = document.getElementById("campoEspecialidades");
+
+    // Adiciona um evento que reage sempre que o utilizador muda o perfil
+    perfil.addEventListener("change", function () {
+
+        // Se o perfil selecionado for MÉDICO
+        if (perfil.value === "MEDICO") {
+
+            // Mostra o campo das especialidades
+            campoEspecialidades.style.display = "block";
+
+        } else {
+
+            // Caso contrário, esconde o campo das especialidades
+            campoEspecialidades.style.display = "none";
+        }
+    });
+});

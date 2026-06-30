@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.service;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import com.iefp.ClinaMedica.model.Medico;
 import com.iefp.ClinaMedica.model.Paciente;
 import com.iefp.ClinaMedica.model.Secretaria;
@@ -69,7 +70,13 @@ public class UtilizadorService {
      *
      * @param utilizador objeto com os dados do utilizador
      */
-    public void criarUtilizador(Utilizador utilizador) {
+    public void criarUtilizador(Utilizador utilizador, String especialidadeStr) {
+
+        Especialidade especialidade = null;
+
+        if (especialidadeStr != null && !especialidadeStr.isBlank()) {
+            especialidade = Especialidade.valueOf(especialidadeStr);
+        }
 
         // Guarda o utilizador na base de dados
         Utilizador novo = utilizadorRepository.save(utilizador);
@@ -80,6 +87,7 @@ public class UtilizadorService {
             case MEDICO:
                 Medico medico = new Medico();
                 medico.setUtilizador(novo);
+                medico.setEspecialidade(especialidade);
                 medicoRepository.save(medico);
                 break;
 

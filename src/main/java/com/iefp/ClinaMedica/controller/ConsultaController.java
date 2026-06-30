@@ -1,52 +1,119 @@
 package com.iefp.ClinaMedica.controller;
 
 import com.iefp.ClinaMedica.service.ConsultaService;
+import com.iefp.ClinaMedica.service.PacienteService;
+import com.iefp.ClinaMedica.service.SecretariaService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador responsável pela gestão de consultas médicas.
+ * Permite listar consultas, pesquisar disponibilidades e marcar consultas.
+ */
+@Controller
 public class ConsultaController {
 
+    /**
+     * Serviço de consultas (lógica de negócio).
+     */
     private final ConsultaService consultaService;
 
-    public ConsultaController(ConsultaService consultaService, ListagemService listagemService) {
+    /**
+     * Serviço de pacientes.
+     */
+    private final PacienteService pacienteService;
+
+    /**
+     * Serviço de secretárias.
+     */
+    private final SecretariaService secretariaService;
+
+    /**
+     * Construtor com injeção de dependências (Spring DI).
+     */
+    public ConsultaController(ConsultaService consultaService,
+                              PacienteService pacienteService,
+                              SecretariaService secretariaService) {
+
         this.consultaService = consultaService;
+        this.pacienteService = pacienteService;
+        this.secretariaService = secretariaService;
     }
 
+    /**
+     * Apresenta a página de consultas.
+     * Permite listar consultas e filtrar disponibilidades por especialidade.
+     *
+     * @param especialidade filtro opcional de especialidade médica
+     * @param model objeto para enviar dados para a view (Thymeleaf)
+     * @return página consultas.html
+     */
     @GetMapping("/consultas")
     public String listarConsultas(@RequestParam(required = false) String especialidade,
                                   Model model) {
+
+        // Lista de todas as consultas já marcadas
         model.addAttribute("consultas", consultaService.listarTodas());
+
+        // Lista de todas as especialidades disponíveis
         model.addAttribute("especialidades", consultaService.listarEspecialidades());
-        model.addAttribute("pacientes", listagemService.listarPacientes());
-        model.addAttribute("secretarias", listagemService.listarSecretarias());
+
+        // Lista de pacientes para seleção no formulário
+        model.addAttribute("pacientes", pacienteService.listarTodos());
+
+        // Lista de secretárias para seleção no formulário
+        model.addAttribute("secretarias", secretariaService.listarTodos());
+
+        // Mantém a especialidade selecionada no filtro
         model.addAttribute("especialidadeSelecionada", especialidade);
 
+        // Se foi escolhida uma especialidade, carrega as disponibilidades livres
         if (especialidade != null && !especialidade.isEmpty()) {
-            model.addAttribute("disponibilidades",
-                    consultaService.listarDisponibilidadePorEspecialidade(especialidade));
+            model.addAttribute(
+                    "disponibilidades",
+                    consultaService.listarDisponibilidadePorEspecialidade(especialidade)
+            );
         }
 
         return "consultas";
     }
 
+    /**
+     * Marca uma nova consulta médica.
+     *
+     * @param disponibilidadeId ID da disponibilidade selecionada
+     * @param pacienteId ID do paciente
+     * @param secretariaId ID da secretária responsável
+     * @param model objeto para mensagens de erro (caso exista)
+     * @return redireciona para a página de consultas
+     */
     @PostMapping("/consultas")
-    public String marcarConsulta(@RequestParam Long disponilidadeId,
+    public String marcarConsulta(@RequestParam Long disponibilidadeId,
                                  @RequestParam Long pacienteId,
-                                 @RequestParam(required = false) Long secretariaId,
+                                 @RequestParam Long secretariaId,
                                  Model model) {
+
         try {
+            // Executa a marcação da consulta
             consultaService.marcarConsulta(
-                    disponilidadeId,
+                    disponibilidadeId,
                     pacienteId,
                     secretariaId
             );
 
+            // Evita reenvio do formulário
             return "redirect:/consultas";
 
         } catch (RuntimeException erro) {
+
+            // Em caso de erro, mantém dados na página
             model.addAttribute("erro", erro.getMessage());
             model.addAttribute("consultas", consultaService.listarTodas());
             model.addAttribute("especialidades", consultaService.listarEspecialidades());
-            model.addAttribute("pacientes", paciente.listarPacientes());
-            model.addAttribute("secretarias", listagemService.listarSecretarias());
+            model.addAttribute("pacientes", pacienteService.listarTodos());
+            model.addAttribute("secretarias", secretariaService.listarTodos());
+
             return "consultas";
         }
     }

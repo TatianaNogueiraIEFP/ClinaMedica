@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="pagina-utilizadores">
+<body class="pagina-disponibilidade">
 
 <!-- Botão de navegação para a área de utilizadores -->
 <a th:href="@{/utilizadores}">
@@ -18,8 +18,6 @@
 
 <!-- Título principal da página -->
 <h2>Disponibilidades dos Médicos</h2>
-
----
 
 <!-- ========================= -->
 <!-- FORMULÁRIO DE CRIAÇÃO -->
@@ -55,7 +53,6 @@
 
 </form>
 
----
 
 <!-- ========================= -->
 <!-- MENSAGEM DE ERRO -->
@@ -65,8 +62,6 @@
 <div th:if="${erro}" class="erro">
     <p th:text="${erro}"></p>
 </div>
-
----
 
 <!-- ========================= -->
 <!-- TABELA DE DISPONIBILIDADES -->

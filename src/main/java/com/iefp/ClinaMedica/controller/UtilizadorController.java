@@ -75,8 +75,11 @@ public class UtilizadorController {
      * @return redirecionamento para a página de listagem de utilizadores
      */
     @PostMapping("/adicionar-utilizador")
-    public String adicionarUtilizador(@ModelAttribute Utilizador utilizador) {
-        utilizadorService.criarUtilizador(utilizador);
+    public String adicionarUtilizador(
+            @ModelAttribute Utilizador utilizador,
+            @RequestParam(required = false) String especialidade) {
+
+        utilizadorService.criarUtilizador(utilizador, especialidade);
 
         return "redirect:/utilizadores";
     }

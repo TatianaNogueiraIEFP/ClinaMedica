@@ -27,6 +27,14 @@
         <a href="/secretarias">
             <button type="button">Secretárias</button>
         </a>
+
+        <a href="/consultas">
+            <button type="button">Consultas</button>
+        </a>
+
+        <a href="/disponibilidades">
+            <button type="button">Diponibilidades</button>
+        </a>
     </div>
 
     <br><br>
@@ -45,11 +53,25 @@
 
         <!-- Perfil do utilizador (Paciente, Médico ou Secretária) -->
         <select name="perfil">
-            <option value="0">Selecione o cargo</option>
+            <option value="">Selecione o cargo</option>
             <option value="PACIENTE">Paciente</option>
             <option value="MEDICO">Médico</option>
             <option value="SECRETARIA">Secretária</option>
         </select>
+
+        <!-- SECÇÃO: ESPECIALIDADE (apenas para MÉDICO) -->
+        <div id="campoEspecialidades" style="display:none; margin-top:10px;">
+            <label>Especialidade</label>
+            <select name="especialidade">
+                <option value="">Selecione a especialidade</option>
+
+                <option value="CARDIOLOGIA">Cardiologia</option>
+                <option value="DERMATOLOGIA">Dermatologia</option>
+                <option value="ORTOPEDIA">Ortopedia</option>
+                <option value="PEDIATRIA">Pediatria</option>
+                <option value="GERAL">Medicina Geral</option>
+            </select>
+        </div>
 
         <!-- Número de telefone -->
         <input type="text" name="telefone" placeholder="Indique o telefone">
@@ -81,7 +103,6 @@
         </div>
 
     </form>
-
 </section>
 
 <!-- SECÇÃO: TABELA DE UTILIZADORES REGISTADOS -->
@@ -123,7 +144,7 @@
 </table>
 
 <!-- Ligação ao ficheiro JavaScript -->
-<script src="/js/script.js"></script>
+<script th:src="@{/js/script.js}"></script>
 
 </body>
 

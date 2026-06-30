@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consultas</title>
+
+    <!-- Folha de estilos da aplicação -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-consultas">
+
+<!-- ===================== TÍTULO ===================== -->
+<h2>Marcação de Consultas</h2>
+
+<!-- ===================== FORMULÁRIO DE MARCAÇÃO ===================== -->
+<form th:action="@{/consultas}" method="post">
+
+    <!-- Seleção da especialidade médica -->
+    <label for="especialidade">Especialidade</label>
+    <select id="especialidade" name="especialidade" required>
+        <option value="">Selecione</option>
+
+        <!-- Lista dinâmica de especialidades -->
+        <option th:each="e : ${especialidades}"
+                th:value="${e}"
+                th:text="${e}">
+        </option>
+    </select>
+
+    <!-- Seleção da disponibilidade do médico -->
+    <label for="disponibilidadeId">Disponibilidade</label>
+    <select id="disponibilidadeId" name="disponibilidadeId" required>
+        <option value="">Selecione</option>
+
+        <!-- Lista de horários disponíveis -->
+        <option th:each="d : ${disponibilidades}"
+                th:value="${d.id}"
+                th:text="${d.medico.utilizador.nome + ' - ' + d.data + ' ' + d.horaInicio}">
+        </option>
+    </select>
+
+    <!-- Seleção do paciente -->
+    <label for="pacienteId">Paciente</label>
+    <select id="pacienteId" name="pacienteId" required>
+        <option value="">Selecione</option>
+
+        <!-- Lista de pacientes registados -->
+        <option th:each="p : ${pacientes}"
+                th:value="${p.id}"
+                th:text="${p.utilizador.nome}">
+        </option>
+    </select>
+
+    <!-- Seleção da secretária responsável -->
+    <label for="secretariaId">Secretária</label>
+    <select id="secretariaId" name="secretariaId" required>
+        <option value="">Selecione</option>
+
+        <!-- Lista de secretárias -->
+        <option th:each="s : ${secretarias}"
+                th:value="${s.id}"
+                th:text="${s.utilizador.nome}">
+        </option>
+    </select>
+
+    <!-- Botão de submissão -->
+    <button type="submit">Marcar Consulta</button>
+
+</form>
+
+<br>
+
+<!-- ===================== LISTA DE CONSULTAS ===================== -->
+<h2>Consultas Registadas</h2>
+
+<table>
+
+    <!-- Cabeçalho da tabela -->
+    <tr>
+        <th>Data</th>
+        <th>Hora Início</th>
+        <th>Hora Fim</th>
+        <th>Médico</th>
+        <th>Paciente</th>
+        <th>Secretária</th>
+        <th>Estado</th>
+    </tr>
+
+    <!-- Lista de consultas -->
+    <tr th:each="c : ${consultas}">
+
+        <!-- Data formatada corretamente -->
+        <td th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></td>
+
+        <!-- Hora de início -->
+        <td th:text="${c.horaInicio}"></td>
+
+        <!-- Hora de fim -->
+        <td th:text="${c.horaFim}"></td>
+
+        <!-- Nome do médico -->
+        <td th:text="${c.disponibilidade.medico.utilizador.nome}"></td>
+
+        <!-- Nome do paciente -->
+        <td th:text="${c.paciente.utilizador.nome}"></td>
+
+        <!-- Nome da secretária -->
+        <td th:text="${c.secretaria.utilizador.nome}"></td>
+
+        <!-- Estado da consulta -->
+        <td th:text="${c.estado}"></td>
+
+    </tr>
+
+</table>
+
+<!-- ===================== PESQUISA DE DISPONIBILIDADES ===================== -->
+<h2>Pesquisar Disponibilidades</h2>
+
+<form th:action="@{/consultas}" method="get">
+
+    <!-- Filtro por especialidade -->
+    <label for="especialidadePesquisa">Especialidade</label>
+
+    <select id="especialidadePesquisa" name="especialidade">
+        <option value="">Indica a especialidade</option>
+
+        <!-- Lista de especialidades -->
+        <option th:each="e : ${especialidades}"
+                th:value="${e}"
+                th:text="${e}">
+        </option>
+
+    </select>
+
+    <button type="submit">Pesquisar</button>
+
+</form>
+
+<!-- Script da aplicação -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>

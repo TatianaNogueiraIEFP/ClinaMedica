@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 /**
  * Classe que representa um paciente da clínica.
  */
@@ -36,4 +39,21 @@ public class Paciente {
     @ManyToOne
     @JoinColumn(name = "medico_id", unique = true)
     private Medico medico;
+
+    @Transient
+    public int getIdade() {
+
+        // Verifica se o utilizador ou a data de nascimento são nulos
+        // para evitar erros de execução (NullPointerException)
+        if (utilizador == null || utilizador.getDataNascimento() == null) {
+            return 0;
+        }
+
+        // Calcula a idade com base na data de nascimento do utilizador
+        // até à data atual
+        return Period.between(
+                utilizador.getDataNascimento(),
+                LocalDate.now()
+        ).getYears();
+    }
 }
