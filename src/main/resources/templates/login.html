@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+
+<h2>Login Clínica Médica</h2>
+
+<!-- ERRO -->
+<p th:if="${erro}" th:text="${erro}" style="color:red;"></p>
+
+<form method="post" action="/login">
+
+    <input type="email" name="email" placeholder="Email" required>
+
+    <input type="password" name="senha" placeholder="Senha" required>
+
+    <button type="submit">Entrar</button>
+
+</form>
+
+</body>
+</html>

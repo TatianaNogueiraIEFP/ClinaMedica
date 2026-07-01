@@ -33,9 +33,9 @@ public class ConsultaService {
         return medicoRepository.listarEspecialidades();
     }
 
-    public List<Disponibilidade> listarDisponibilidadePorEspecialidade(String especialidade) {
+    public List<Disponibilidade> listarDisponibilidadePorEspecialidade(Especialidade especialidade) {
         return disponibilidadeRepository
-                .findByMedico_EspecialidadeIgnoreCaseAndOcupadaFalseOrderByDataAscHoraInicioAsc(especialidade);
+                .findByMedico_EspecialidadeAndOcupadaFalseOrderByDataAscHoraInicioAsc(especialidade);
     }
 
     public void marcarConsulta(Long disponibilidadeId,

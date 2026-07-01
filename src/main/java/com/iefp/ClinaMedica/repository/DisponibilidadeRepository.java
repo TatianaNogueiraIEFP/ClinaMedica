@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.repository;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import com.iefp.ClinaMedica.model.Disponibilidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,8 +16,8 @@ public interface DisponibilidadeRepository extends JpaRepository<Disponibilidade
     /**
      * Lista disponibilidades livres por especialidade do médico.
      */
-    List<Disponibilidade> findByMedico_EspecialidadeIgnoreCaseAndOcupadaFalseOrderByDataAscHoraInicioAsc(
-            String especialidade
+    List<Disponibilidade> findByMedico_EspecialidadeAndOcupadaFalseOrderByDataAscHoraInicioAsc(
+            Especialidade especialidade
     );
 
     /**

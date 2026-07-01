@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Receitas Médicas</title>
+
+    <!-- Ligação ao ficheiro de estilos CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-receitas">
+
+<!-- Botão de navegação para a área de utilizadores -->
+<a th:href="@{/utilizadores}">
+    <button type="button">Utilizadores</button>
+</a>
+
+<!-- Título da página -->
+<h2>Registo de Receitas Médicas</h2>
+
+<!-- Formulário para criar uma nova receita -->
+<form th:action="@{/receitas/criar}" method="post">
+
+    <!-- Seleção da consulta -->
+    <label for="consultaId">Consulta</label>
+    <select id="consultaId" name="consultaId" required>
+
+        <option value="">Selecione uma consulta</option>
+
+        <!-- Lista de consultas -->
+        <option th:each="c : ${consultas}"
+                th:value="${c.id}"
+                th:text="${c.data + ' - ' + c.paciente.utilizador.nome + ' - ' + c.disponibilidade.medico.utilizador.nome}">
+        </option>
+
+    </select>
+
+    <!-- Nome do medicamento -->
+    <label for="medicamento">Medicamento</label>
+    <input type="text"
+           id="medicamento"
+           name="medicamento"
+           placeholder="Indique o medicamento"
+           required>
+
+    <!-- Dosagem -->
+    <label for="dosagem">Dosagem</label>
+    <input type="text"
+           id="dosagem"
+           name="dosagem"
+           placeholder="Ex.: 500 mg"
+           required>
+
+    <!-- Instruções -->
+    <label for="instrucoes">Instruções</label>
+    <textarea id="instrucoes"
+              name="instrucoes"
+              rows="5"
+              placeholder="Indique as instruções para o paciente"
+              required>
+    </textarea>
+
+    <!-- Botão para guardar -->
+    <button type="submit">Registar Receita</button>
+
+</form>
+
+<br><br>
+
+<!-- Tabela com as receitas registadas -->
+<h2>Receitas Registadas</h2>
+
+<table>
+
+    <!-- Cabeçalho da tabela -->
+    <tr>
+        <th>Consulta</th>
+        <th>Paciente</th>
+        <th>Médico</th>
+        <th>Medicamento</th>
+        <th>Dosagem</th>
+        <th>Instruções</th>
+    </tr>
+
+    <!-- Lista de receitas -->
+    <tr th:each="r : ${receitas}">
+
+        <!-- Data da consulta -->
+        <td th:text="${r.consulta.data}"></td>
+
+        <!-- Nome do paciente -->
+        <td th:text="${r.consulta.paciente.utilizador.nome}"></td>
+
+        <!-- Nome do médico -->
+        <td th:text="${r.consulta.disponibilidade.medico.utilizador.nome}"></td>
+
+        <!-- Medicamento -->
+        <td th:text="${r.medicamento}"></td>
+
+        <!-- Dosagem -->
+        <td th:text="${r.dosagem}"></td>
+
+        <!-- Instruções -->
+        <td th:text="${r.instrucoes}"></td>
+
+    </tr>
+
+</table>
+
+<!-- Ligação ao ficheiro JavaScript -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

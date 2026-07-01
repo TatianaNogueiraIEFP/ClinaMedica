@@ -6,6 +6,9 @@ import com.iefp.ClinaMedica.service.SecretariaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.iefp.ClinaMedica.classes.Especialidade;
+
+import java.util.List;
 
 /**
  * Controlador responsável pela gestão de consultas médicas.
@@ -50,7 +53,7 @@ public class ConsultaController {
      * @return página consultas.html
      */
     @GetMapping("/consultas")
-    public String listarConsultas(@RequestParam(required = false) String especialidade,
+    public String listarConsultas(@RequestParam(required = false) Especialidade especialidade,
                                   Model model) {
 
         // Lista de todas as consultas já marcadas
@@ -69,11 +72,13 @@ public class ConsultaController {
         model.addAttribute("especialidadeSelecionada", especialidade);
 
         // Se foi escolhida uma especialidade, carrega as disponibilidades livres
-        if (especialidade != null && !especialidade.isEmpty()) {
+        if (especialidade != null && !especialidade.name().isEmpty()) {
             model.addAttribute(
                     "disponibilidades",
                     consultaService.listarDisponibilidadePorEspecialidade(especialidade)
             );
+        } else {
+            model.addAttribute("disponibilidades", List.of());
         }
 
         return "consultas";

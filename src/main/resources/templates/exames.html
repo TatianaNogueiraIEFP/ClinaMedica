@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exames</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-exames">
+
+<a href="/utilizadores">
+    <button type="button">Utilizadores</button>
+</a>
+
+<h2>Exames Médicos</h2>
+
+<!-- FORMULÁRIO -->
+<form th:action="@{/exames/criar}" method="post">
+
+    <select name="consultaId">
+        <option value="">Consulta</option>
+        <option th:each="c : ${consultas}"
+                th:value="${c.id}"
+                th:text="${c.id}">
+        </option>
+    </select>
+
+    <select name="medicoId">
+        <option value="">Médico</option>
+        <option th:each="m : ${medicos}"
+                th:value="${m.id}"
+                th:text="${m.utilizador.nome}">
+        </option>
+    </select>
+
+    <select name="pacienteId">
+        <option value="">Paciente</option>
+        <option th:each="p : ${pacientes}"
+                th:value="${p.id}"
+                th:text="${p.utilizador.nome}">
+        </option>
+    </select>
+
+    <input type="text" name="tipo" placeholder="Tipo de exame">
+
+    <input type="text" name="resultado" placeholder="Resultado">
+
+    <button type="submit">Criar Exame</button>
+
+</form>
+
+<hr>
+
+<!-- TABELA -->
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Consulta</th>
+        <th>Médico</th>
+        <th>Paciente</th>
+        <th>Tipo</th>
+        <th>Resultado</th>
+    </tr>
+
+    <tr th:each="e : ${exames}">
+        <td th:text="${e.id}"></td>
+        <td th:text="${e.consulta.id}"></td>
+        <td th:text="${e.medico.utilizador.nome}"></td>
+        <td th:text="${e.paciente.utilizador.nome}"></td>
+        <td th:text="${e.tipo}"></td>
+        <td th:text="${e.resultado}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

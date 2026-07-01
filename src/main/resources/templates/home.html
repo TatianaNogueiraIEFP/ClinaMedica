@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Clínica Médica</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<h1>🏥 Clínica Médica - Dashboard</h1>
+
+<!-- MENU PRINCIPAL -->
+<nav>
+
+    <a href="/consultas"><button>Consultas</button></a>
+
+    <a href="/medicos"><button>Médicos</button></a>
+
+    <a href="/pacientes"><button>Pacientes</button></a>
+
+    <a href="/secretarias"><button>Secretárias</button></a>
+
+    <a href="/disponibilidades"><button>Disponibilidades</button></a>
+
+    <a href="/receitas"><button>Receitas</button></a>
+
+    <a href="/exames"><button>Exames</button></a>
+
+    <a href="/utilizadores"><button>Utilizadores</button></a>
+
+</nav>
+
+<hr>
+
+<!-- INFO UTILIZADOR LOGADO -->
+<p th:text="'Bem-vindo, ' + ${session.user.nome}"></p>
+<p th:text="'Perfil: ' + ${session.user.perfil}"></p>
+
+<!-- LOGOUT -->
+<a href="/logout">
+    <button>Sair</button>
+</a>
+
+</body>
+</html>
