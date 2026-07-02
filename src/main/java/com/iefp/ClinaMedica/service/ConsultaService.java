@@ -1,6 +1,6 @@
 package com.iefp.ClinaMedica.service;
 
-import com.iefp.ClinaMedica.classes.Especialidade;
+import com.iefp.ClinaMedica.enums.Especialidade;
 import com.iefp.ClinaMedica.model.Consulta;
 import com.iefp.ClinaMedica.model.Disponibilidade;
 import com.iefp.ClinaMedica.model.Paciente;

@@ -6,7 +6,7 @@ import com.iefp.ClinaMedica.service.SecretariaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.iefp.ClinaMedica.classes.Especialidade;
+import com.iefp.ClinaMedica.enums.Especialidade;
 
 import java.util.List;
 

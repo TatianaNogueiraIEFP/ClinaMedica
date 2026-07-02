@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Utilizador</title>
+</head>
+
+<body class="pagina-editar">
+
+<h2>Editar Utilizador</h2>
+
+<!-- Mensagem de sucesso -->
+<p th:if="${sucesso}" th:text="${sucesso}" style="color:green;"></p>
+
+<!-- Mensagem de erro -->
+<p th:if="${erro}" th:text="${erro}" style="color:red;"></p>
+
+<!-- Formulário de edição -->
+<form th:action="@{/editar/{tipo}/{id}(tipo=${tipo}, id=${id})}" method="post">
+
+    <label for="nome">Nome</label><br>
+    <input type="text"
+           id="nome"
+           name="nome"
+           th:value="${utilizador.nome}"
+           required><br><br>
+
+    <label for="email">Email</label><br>
+    <input type="email"
+           id="email"
+           name="email"
+           th:value="${utilizador.email}"
+           required><br><br>
+
+    <label for="telefone">Telefone</label><br>
+    <input type="text"
+           id="telefone"
+           name="telefone"
+           th:value="${utilizador.telefone}"
+           required><br><br>
+
+    <label for="dataNascimento">Data de nascimento</label><br>
+    <input type="date"
+           id="dataNascimento"
+           name="dataNascimento"
+           th:value="${utilizador.dataNascimento}"
+           required><br><br>
+
+    <label for="morada">Morada</label><br>
+    <input type="text"
+           id="morada"
+           name="morada"
+           th:value="${utilizador.morada}"
+           required><br><br>
+
+    <!-- Campo visível apenas para médicos -->
+    <div th:if="${tipo == 'medico'}">
+        <label for="especialidade">Especialidade</label><br>
+
+        <select id="especialidade" name="especialidade">
+            <option th:each="esp : ${T(com.iefp.ClinaMedica.enums.Especialidade).values()}"
+                    th:value="${esp}"
+                    th:text="${esp}"
+                    th:selected="${esp == especialidade}">
+            </option>
+        </select>
+
+        <br><br>
+    </div>
+
+    <button type="submit">Guardar Alterações</button>
+
+</form>
+
+<br>
+
+<!-- Botão para apagar -->
+<form th:action="@{/apagar/{tipo}/{id}(tipo=${tipo}, id=${id})}"
+      method="post"
+      onsubmit="return confirm('Tem a certeza que pretende apagar este utilizador?');">
+
+    <button type="submit">Apagar Utilizador</button>
+
+</form>
+
+<br>
+
+<!-- Botão voltar -->
+<a th:if="${tipo == 'paciente'}" th:href="@{/pacientes}">
+    Voltar à lista de pacientes
+</a>
+
+<a th:if="${tipo == 'medico'}" th:href="@{/medicos}">
+    Voltar à lista de médicos
+</a>
+
+<a th:if="${tipo == 'secretaria'}" th:href="@{/secretarias}">
+    Voltar à lista de secretárias
+</a>
+
+</body>
+</html>

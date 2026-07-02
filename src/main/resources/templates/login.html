@@ -6,7 +6,7 @@
     <title>Login</title>
 </head>
 
-<body>
+<body class="pagina-login">
 
 <h2>Login Clínica Médica</h2>
 
@@ -21,6 +21,13 @@
 
     <button type="submit">Entrar</button>
 
+</form>
+
+<!-- Botão para criar uma nova conta -->
+<p>Ainda não tem uma conta?</p>
+
+<form th:action="@{/utilizadores}" method="get">
+    <button type="submit">Criar conta</button>
 </form>
 
 </body>

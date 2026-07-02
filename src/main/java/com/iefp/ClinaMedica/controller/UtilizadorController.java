@@ -1,6 +1,6 @@
 package com.iefp.ClinaMedica.controller;
 
-import com.iefp.ClinaMedica.classes.Especialidade;
+import com.iefp.ClinaMedica.enums.Especialidade;
 import com.iefp.ClinaMedica.model.Utilizador;
 import com.iefp.ClinaMedica.service.UtilizadorService;
 

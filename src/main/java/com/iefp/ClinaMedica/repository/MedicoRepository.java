@@ -1,6 +1,6 @@
 package com.iefp.ClinaMedica.repository;
 
-import com.iefp.ClinaMedica.classes.Especialidade;
+import com.iefp.ClinaMedica.enums.Especialidade;
 import com.iefp.ClinaMedica.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

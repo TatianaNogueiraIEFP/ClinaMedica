@@ -1,6 +1,6 @@
 package com.iefp.ClinaMedica.model;
 
-import com.iefp.ClinaMedica.classes.Perfil;
+import com.iefp.ClinaMedica.enums.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

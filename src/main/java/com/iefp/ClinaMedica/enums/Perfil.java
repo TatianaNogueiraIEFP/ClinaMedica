@@ -1,4 +1,4 @@
-package com.iefp.ClinaMedica.classes;
+package com.iefp.ClinaMedica.enums;
 
 public enum Perfil {
     MEDICO,

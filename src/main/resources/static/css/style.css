@@ -132,3 +132,15 @@ select {
 .pagina-exames {
     background-color: #FFA100;
 }
+
+.pagina-login {
+    background-color: 00FAE7;
+}
+
+.pagina-home {
+    background-color: #FFEB00;
+}
+
+.pagina-editar {
+    background-color: #9F91CF;
+}
