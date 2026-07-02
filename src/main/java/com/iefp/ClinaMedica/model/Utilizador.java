@@ -69,11 +69,11 @@ public class Utilizador {
      *
      * @return idade em anos; devolve 0 caso a data de nascimento não esteja definida.
      */
-    public Integer getIdade() {
+    public int getIdade() {
         if (dataNascimento == null) {
             return 0;
         }
-
+        // Calcula a idade do utilizador
         return Period.between(dataNascimento, LocalDate.now()).getYears();
     }
 

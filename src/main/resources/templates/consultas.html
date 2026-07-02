@@ -23,18 +23,6 @@
 <!-- ===================== FORMULÁRIO DE MARCAÇÃO ===================== -->
 <form th:action="@{/consultas}" method="post">
 
-    <!-- Seleção da especialidade médica -->
-    <label for="especialidade">Especialidade</label>
-    <select id="especialidade" name="especialidade" required>
-        <option value="">Selecione</option>
-
-        <!-- Lista dinâmica de especialidades -->
-        <option th:each="e : ${especialidades}"
-                th:value="${e}"
-                th:text="${e}">
-        </option>
-    </select>
-
     <!-- Seleção da disponibilidade do médico -->
     <label for="disponibilidadeId">Disponibilidade</label>
     <select id="disponibilidadeId" name="disponibilidadeId" required>
@@ -136,7 +124,8 @@
         <!-- Lista de especialidades -->
         <option th:each="e : ${especialidades}"
                 th:value="${e}"
-                th:text="${e}">
+                th:text="${e}"
+                th:selected="${e == especialidadeSelecionada}">
         </option>
 
     </select>
