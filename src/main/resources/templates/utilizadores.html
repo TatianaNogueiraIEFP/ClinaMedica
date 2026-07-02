@@ -42,6 +42,15 @@
         <a href="/exames">
             <button type="button">Exames</button>
         </a>
+
+        <!-- Botão para editar a conta do utilizador autenticado -->
+        <div th:if="${utilizador != null}">
+            <a th:href="@{/editar/{tipo}/{id}(
+            tipo=${#strings.toLowerCase(utilizador.perfil.name())},
+            id=${utilizador.id})}">
+                <button type="button">Editar a minha conta</button>
+            </a>
+        </div>
     </div>
 
     <br><br>
