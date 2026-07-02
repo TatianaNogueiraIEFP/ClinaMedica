@@ -1,5 +1,6 @@
 package com.iefp.ClinaMedica.controller;
 
+import com.iefp.ClinaMedica.classes.Especialidade;
 import com.iefp.ClinaMedica.model.Utilizador;
 import com.iefp.ClinaMedica.service.UtilizadorService;
 
@@ -60,6 +61,8 @@ public class UtilizadorController {
         // Envia a lista para a view
         model.addAttribute("utilizadores", utilizadores);
 
+        // Envia a especialidade
+        model.addAttribute("especialidades", Especialidade.values());
         return "utilizadores";
     }
 
